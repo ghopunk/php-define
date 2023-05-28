@@ -86,6 +86,7 @@ class DefinedDir{
 			$name = $name . '-' . $uniq;
 		}
 		$this->resultName = $name;
+		$this->setResult();
 	}
 	public function getResultName(){
 		return $this->resultName;
@@ -93,6 +94,7 @@ class DefinedDir{
 	
 	public function setResultFolderName( $name ){
 		$this->resultFolderName = $name;
+		$this->setResult();
 	}
 	public function getResultFolderName(){
 		return $this->resultFolderName;
@@ -100,6 +102,7 @@ class DefinedDir{
 	
 	public function setResultSubFolderName( $subName ){
 		$this->resultSubFolderName = $subName;
+		$this->setResult();
 	}	
 	public function getResultSubFolderName(){
 		return $this->resultSubFolderName;
