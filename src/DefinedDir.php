@@ -1,4 +1,5 @@
 <?php
+
 namespace ghopunk\Helpers;
 
 use ghopunk\Helpers\Encryption;
@@ -264,4 +265,3 @@ EOF;
 	return $text;
 	}
 }
-?>
