@@ -3,6 +3,7 @@
 namespace ghopunk\Helpers;
 
 use ghopunk\Helpers\Encryption;
+use ghopunk\Helpers\Str;
 
 class DefinedDir{
 	protected $mainDir;
@@ -66,7 +67,7 @@ class DefinedDir{
 	}
 	
 	public function setMainDir( $dir ){
-		$dir 			= $this->untrailingslashit( $dir );
+		$dir 			= Str::untrailingslashit( $dir );
 		$this->mainDir 	= $dir;
 	}
 	public function getMainDir(){
@@ -74,7 +75,7 @@ class DefinedDir{
 	}
 	
 	public function setMainPath( $path ){
-		$path 			= $this->untrailingslashit( $path );
+		$path 			= Str::untrailingslashit( $path );
 		$this->mainPath	= $path;
 	}
 	public function getMainPath(){
@@ -122,7 +123,7 @@ class DefinedDir{
 	}
 	
 	public function setDir( $name, $value ){
-		$value 				= $this->untrailingslashit( $value );
+		$value 				= Str::untrailingslashit( $value );
 		$this->dir[$name] 	= $value;
 	}
 	public function getDir( $name='main' ){
@@ -133,18 +134,18 @@ class DefinedDir{
 		} else {
 			$this->setUser();
 			$userDir = $this->dir['userDir'];
-			$userDir = $this->untrailingslashit( $userDir );
+			$userDir = Str::untrailingslashit( $userDir );
 			if( empty( $this->getName( $name ) ) ){
 				$this->setName( $name );
 			}
 			$dir	= $userDir . DIRECTORY_SEPARATOR . $this->getName( $name );
 		}
-		$dir	= $this->untrailingslashit( $dir );
+		$dir	= Str::untrailingslashit( $dir );
 		return $dir;
 	}
 	
 	public function setPath( $name, $value ){
-		$value 				= $this->untrailingslashit( $value );
+		$value 				= Str::untrailingslashit( $value );
 		$this->path[$name] 	= $value;
 	}
 	public function getPath( $name='main' ){
@@ -155,13 +156,13 @@ class DefinedDir{
 		} else {
 			$this->setUser();
 			$userDir = $this->path['userDir'];
-			$userDir = $this->untrailingslashit( $userDir );
+			$userDir = Str::untrailingslashit( $userDir );
 			if( empty( $this->getName( $name ) ) ){
 				$this->setName( $name );
 			}
 			$path = $userDir . '/' . $this->getName( $name );
 		}
-		$path = $this->untrailingslashit( $path );
+		$path = Str::untrailingslashit( $path );
 		return $path;
 	}
 	
@@ -185,20 +186,14 @@ class DefinedDir{
 	}
 	
 	public function trailingslashit_dir( $string ) {
-		return $this->untrailingslashit( $string ) . DIRECTORY_SEPARATOR;
-	}
-	public function trailingslashit( $string ) {
-		return $this->untrailingslashit( $string ) . '/';
-	}
-	public function untrailingslashit( $string ) {
-		return rtrim( $string, '/\\' );
+		return Str::untrailingslashit( $string ) . DIRECTORY_SEPARATOR;
 	}
 	
-	public function setEncryption( $encryption ){
+	public function setEncryption( Encryption $encryption ){
 		$this->encryption = $encryption;
 	}
 	public function getEncryption(){
-		if( empty( $this->encryption ) && class_exists( 'Encryption' ) ) {
+		if( empty( $this->encryption ) && class_exists( '\ghopunk\Helpers\Encryption' ) ) {
 			$encryption = new Encryption;
 			$this->setEncryption( $encryption );
 		}
@@ -226,7 +221,7 @@ class DefinedDir{
 	public function mkdir_r( $dir, $rights=0777 ){
 		if( !is_dir( $dir ) ){
 			$dir 			= str_replace( '/', DIRECTORY_SEPARATOR, $dir );
-			$target_parent 	= $this->untrailingslashit( $dir );
+			$target_parent 	= Str::untrailingslashit( $dir );
 			while ( '.' !== $target_parent && ! is_dir( $target_parent ) && dirname( $target_parent ) !== $target_parent ) {
 				$target_parent = dirname( $target_parent );
 			}

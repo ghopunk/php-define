@@ -16,7 +16,8 @@
     ],
     "require": {
         "php": ">=5.6",
-        "ghopunk/php-encryption": "*"
+        "ghopunk/php-encryption": "*",
+		"ghopunk/php-helpers": "*"
     },
     "autoload": {
         "psr-4": {
